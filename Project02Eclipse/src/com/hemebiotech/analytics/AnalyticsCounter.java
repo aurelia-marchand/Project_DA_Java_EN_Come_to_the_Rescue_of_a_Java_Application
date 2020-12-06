@@ -33,17 +33,17 @@ public class AnalyticsCounter {
 		String fileOut = "result.out";
 
 		/*
-		 * Création des instances des classes de lecture et d'écriture via leurs
-		 * interfaces Utilisation des méthodes de récupération des données et d'écriture
+		 * Creation of instances of read and write classes via their interfaces Using
+		 * data recovery and write methods
 		 * 
-		 * Ces appels de classes pouvant remonter des erreurs, on gère ici la
-		 * responsabilié de gestion des exceptions
+		 * These class calls can report errors, we manage here the exception management
+		 * responsibility
 		 * 
 		 */
 		try {
 			/*
-			 * On envoi notre chemin de fichier via le constructeur de la classe On appel la
-			 * méthode getSymptoms(), les résultats sont placés dans une liste de String.
+			 * We send our file path via the constructor of the class. We call the
+			 * getSymptoms () method, the results are placed in a list of String.
 			 */
 			ISymptomReader extractionSymptoms = new ReadSymptomDataFromFile(fileIn);
 			List<String> completeList = extractionSymptoms.getSymptoms();
@@ -75,17 +75,13 @@ public class AnalyticsCounter {
 				ISymptomsWriter sortedSymptoms = new WriteDataSymptomsToFile(sortedList, fileOut);
 				sortedSymptoms.writeSymptoms();
 			} catch (Exception i) {
-				// To do try to put exception in log file
-				System.out.println(i + " Writing problem, origin WriteDataSymptomFromFile");
+				i.printStackTrace();
 			}
 
 		} catch (Exception e) {
-
-			// To do try to put exception in log file
-			System.out.println(e + " Reading problem, origin ReadSymptomsDataToFile");
+			e.printStackTrace();
 		}
 
 	}
 
 }
-
