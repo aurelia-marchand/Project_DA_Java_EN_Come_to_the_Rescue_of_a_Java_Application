@@ -2,7 +2,6 @@ package com.hemebiotech.analytics;
 
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.Set;
 import java.util.TreeMap;
 
 /**
@@ -47,13 +46,11 @@ public class WriteDataSymptomsToFile implements ISymptomsWriter {
 		try (FileWriter writer = new FileWriter(fileOut)) {
 
 			/*
-			 * Get keys with keySet () method, return list of keys as a set of objects. By
+			 * Get keys with keySet () method, return list of keys. By
 			 * browsing our TreeMap, we retrieve the corresponding values. We write our
 			 * result in the output file with the write () method
 			 */
-			Set<String> keys = sortedList.keySet();
-
-			for (String key : keys) {
+			for (String key : sortedList.keySet()) {
 				writer.write(key + " : " + sortedList.get(key) + "\n");
 			}
 

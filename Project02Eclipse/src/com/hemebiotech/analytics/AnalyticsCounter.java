@@ -1,10 +1,8 @@
 package com.hemebiotech.analytics;
 
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
 
@@ -53,26 +51,23 @@ public class AnalyticsCounter {
 			 * Object HashSet : list without duplicate
 			 * 
 			 */
-			Set<String> setList = new HashSet<String>(completeList);
+			Set<String> setList = new HashSet<>(completeList);
 
 			/*
-			 * Object HashMap : hashSet / key and occurrences / value
+			 * Object TreeMap : hashSet / key and occurrences / value.
+			 * 
+			 * Provided natural order, here alphabetical
 			 */
-			Map<String, Integer> mapList = new HashMap<String, Integer>();
+			TreeMap<String, Integer> mapList = new TreeMap<>();
 			for (String s : setList) {
 				mapList.put(s, Collections.frequency(completeList, s));
 			}
-
-			/*
-			 * Object TreeMap : provided natural order, here alphabetical
-			 */
-			TreeMap<String, Integer> sortedList = new TreeMap<>(mapList);
 
 			try {
 				/*
 				 * Sending the TreeMap and output file path as parameter
 				 */
-				ISymptomsWriter sortedSymptoms = new WriteDataSymptomsToFile(sortedList, fileOut);
+				ISymptomsWriter sortedSymptoms = new WriteDataSymptomsToFile(mapList, fileOut);
 				sortedSymptoms.writeSymptoms();
 			} catch (Exception i) {
 				i.printStackTrace();
